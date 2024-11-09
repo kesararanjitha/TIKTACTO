@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .box{
+            display: flex;
+        }
+        .box1{
+            width: 100px;
+            height: 100px;
+            border: 3px solid;
+            display: flex;
+           }
+       
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="grid">
+    <div class="box">
+        <div onclick="handle_click(this)" id="0" class="box1"></div>
+        <div onclick="handle_click(this)" id="1" class="box1"></div>
+        <div onclick="handle_click(this)" id="2" class="box1"></div>
+        </div>
+        <div class="box">
+        <div onclick="handle_click(this)" id="3" class="box1"></div>
+        <div onclick="handle_click(this)"  id="4" class="box1"></div>
+        <div onclick="handle_click(this)" id="5" class="box1"></div>
+        </div>
+        <div class="box">
+            <div onclick="handle_click(this)" id="6" class="box1"></div>
+            <div onclick="handle_click(this)" id="7" class="box1"></div>
+            <div onclick="handle_click(this)" id="8" class="box1"></div>
+    
+    </div>
+    </div>
+    </div>
+    <script>
+        let current_elem = "x";
+let arr = new Array(9).fill(0);
+
+function winner() {
+    // Check rows
+    if ((arr[0] !== 0 && arr[0] === arr[1] && arr[1] === arr[2]) ||
+        (arr[3] !== 0 && arr[3] === arr[4] && arr[4] === arr[5]) ||
+        (arr[6] !== 0 && arr[6] === arr[7] && arr[7] === arr[8]) ||
+        
+        // Check columns
+        (arr[0] !== 0 && arr[0] === arr[3] && arr[3] === arr[6]) ||
+        (arr[1] !== 0 && arr[1] === arr[4] && arr[4] === arr[7]) ||
+        (arr[2] !== 0 && arr[2] === arr[5] && arr[5] === arr[8]) ||
+        
+        // Check diagonals
+        (arr[0] !== 0 && arr[0] === arr[4] && arr[4] === arr[8]) ||
+        (arr[2] !== 0 && arr[2] === arr[4] && arr[4] === arr[6])
+    ) {
+        document.write(`Winner is ${current_elem}`);
+    }
+}
+
+function handle_click(el) {
+    const id = Number(el.id);
+    if (arr[id] === 0) { // Check if the cell is empty before making a move
+        arr[id] = current_elem;
+        el.innerText = current_elem;
+        winner();
+
+        // Switch turns
+        current_elem = (current_elem === "x") ? "O" : "x";}
+     else {
+        console.log("Cell already occupied");
+    }
+}
+
+        
+    </script>
+</body>
+</html>
